@@ -13,4 +13,14 @@
 #' moon_light_visual("")
 moon_light_visual <- function(start_date, ...) {
 
+  #creating new column to extract date from date and time
+  date_data <- moon_light |> dplyr::mutate(date = substring(YYYY.MM.DDTHH.mm.ss.fff, 1, 10))
+
+  average_light <- date_data |>
+    dplyr::group_by(date) |>
+    dplyr::summarize(mean_light = mean(Hz), .groups = "drop",
+                     moon_phase = mean(Category))
+
+  glimpse(average_light)
 }
+
