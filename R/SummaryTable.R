@@ -14,17 +14,17 @@
 #' avg_light("2025-03-01", "2025-03-10")
 avg_light <- function(
     # if no argument is passed in, use all dates as the default
-    start = min(as.Date(substring(moon_light$YYYY.MM.DDTHH.mm.ss.fff, 1, 10))),
-    end = max(as.Date(substring(moon_light$YYYY.MM.DDTHH.mm.ss.fff, 1, 10))), ...) {
+    start = min(as.Date(substring(moon_light$UTC.Date...Time, 1, 10))),
+    end = max(as.Date(substring(moon_light$UTC.Date...Time, 1, 10))), ...) {
 
   #creating new column to extract date from date and time
-  date_data <- moon_light |> dplyr::mutate(date = as.Date(substring(YYYY.MM.DDTHH.mm.ss.fff, 1, 10)))
+  date_data <- moon_light |> dplyr::mutate(date = as.Date(substring(UTC.Date...Time, 1, 10)))
 
   # filter the dates and make summary table
   summarized <- date_data |> filter(date >= as.Date(start) & date <= as.Date(end)) |>
     dplyr::group_by(date) |>
-    dplyr::summarize(meanHz = mean(Hz),
-                     meanMag = mean(mag.arcsec.2))
+    dplyr::summarize(meanFreq = mean(Frequency),
+                     meanMSAS = mean(MSAS))
 
   knitr::kable(summarized, "simple")
 }
@@ -45,14 +45,14 @@ light_by_moon <- function(metric = Category){
   # find summary statistics
   summarized <- moon_light |>
     dplyr::group_by({{metric}}) |>
-    dplyr::summarise(minHz = min(Hz),
-                     maxHz = max(Hz),
-                     avgHz = mean(Hz),
-                     minMag = min(mag.arcsec.2),
-                     maxMag = max(mag.arcsec.2),
-                     avgMag = mean(mag.arcsec.2))
+    dplyr::summarise(minFreq = min(Frequency),
+                     maxFreq = max(Frequency),
+                     avgFreq = mean(Frequency),
+                     minMSAS = min(MSAS),
+                     maxMSAS = max(MSAS),
+                     avgMSAS = mean(MSAS))
 
-  # make the table and assign column names
+  # make the table
   knitr::kable(summarized, "simple")
 }
 

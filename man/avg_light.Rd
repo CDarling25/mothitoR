@@ -5,8 +5,8 @@
 \title{Summary Table of average light sensor data}
 \usage{
 avg_light(
-  start = min(as.Date(substring(moon_light$YYYY.MM.DDTHH.mm.ss.fff, 1, 10))),
-  end = max(as.Date(substring(moon_light$YYYY.MM.DDTHH.mm.ss.fff, 1, 10))),
+  start = min(as.Date(substring(moon_light$UTC.Date...Time, 1, 10))),
+  end = max(as.Date(substring(moon_light$UTC.Date...Time, 1, 10))),
   ...
 )
 }
