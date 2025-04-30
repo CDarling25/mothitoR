@@ -79,7 +79,15 @@ Ex:
 light_by_moon(Phase)
 ```
 
-### Insert Cameron's function here :)
+### moon_light_visualizer
+
+This function takes in a start and end date as strings and returns a visual of how the average light varies each day within the provided date range. This visual is then shown to the user
+
+Ex: 
+```r
+moon_light_visual("2025-03-06", "2025-03-10")
+```
+#<img src="data-raw/visual_readme.png" align="center" height="139"/>
 
 ## Contributors
 
