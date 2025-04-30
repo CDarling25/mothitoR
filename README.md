@@ -87,7 +87,7 @@ Ex:
 ```r
 moon_light_visual("2025-03-06", "2025-03-10")
 ```
-#<img src="data-raw/visual_readme.png" align="center" height="139"/>
+<img src="data-raw/visual_readme.png" align="center" height="500"/>
 
 ## Contributors
 
