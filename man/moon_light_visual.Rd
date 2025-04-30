@@ -4,10 +4,12 @@
 \alias{moon_light_visual}
 \title{Visual Analysis of moon phase and light sensor data}
 \usage{
-moon_light_visual(start_date, ...)
+moon_light_visual(start_date, end_date, ...)
 }
 \arguments{
 \item{start_date}{The desired start date of visual analysis}
+
+\item{end_date}{The desired end date of visual analysis}
 
 \item{...}{Additional arguments}
 }
@@ -18,10 +20,10 @@ returns a graph and displays it
 Visual Analysis of moon phase and light sensor data
 }
 \details{
-This function takes in a desired start date and will return a visualization for a week's worth of data
+This function visualizes the average Hz
 }
 \examples{
-moon_light_visual("")
+moon_light_visual("2025-03-10")
 }
 \author{
 Cameron Darling
