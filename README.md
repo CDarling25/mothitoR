@@ -71,12 +71,12 @@ avg_light("2025-03-04", "2025-03-10")
 
 ### light_by_moon
 
-This function returns general data about how light varies depending on moon metrics. light_by_moon takes in a metric (Category, Phase, Area) and outputs the associated Macleish light data. If no metric is passed, the function will take Category as its default metric. 
+This function returns general data about how light varies depending on moon metrics. light_by_moon takes in a metric (Category, Phase, Area) passed in as a string and outputs the associated Macleish light data. If no metric is passed, the function will take Category as its default metric. 
 
 Ex:
 
 ``` r
-light_by_moon(Phase)
+light_by_moon("Phase")
 ```
 
 ### moon_light_visualizer
@@ -93,3 +93,4 @@ moon_light_visual("2025-03-06", "2025-03-10")
 
 - [Cameron Darling](https://github.com/CDarling25)
 - [Molly Daniel](https://github.com/mollyd13)
+- [Caroline Zouloumian](https://github.com/czouloumian)

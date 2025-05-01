@@ -36,23 +36,29 @@ avg_light <- function(
 #' @author Molly Daniel
 #' @import dplyr
 #' @import knitr
-#' @param metric Category, Area, Phase - passed in without quotes
+#' @import sqldf
+#' @param metric Category, Area, Phase - passed in with quotes
 #' @export
 #' @return returns a summary table and displays it
 #' @examples
-#' light_by_moon_phase()
-light_by_moon <- function(metric = Category){
+#' light_by_moon()
+light_by_moon <- function(metric = "Category"){
   # find summary statistics
-  summarized <- moon_light |>
-    dplyr::group_by({{metric}}) |>
-    dplyr::summarise(minFreq = min(Frequency),
-                     maxFreq = max(Frequency),
-                     avgFreq = mean(Frequency),
-                     minMSAS = min(MSAS),
-                     maxMSAS = max(MSAS),
-                     avgMSAS = mean(MSAS))
+
+  query <- paste0(
+    "SELECT ", metric, ", ",
+    "MIN(Frequency) AS minFreq, ",
+    "MAX(Frequency) AS maxFreq, ",
+    "AVG(Frequency) AS meanFreq, ",
+    "MIN(MSAS) AS minMSAS, ",
+    "MAX(MSAS) AS maxMSAS, ",
+    "AVG(MSAS) AS meanMSAS ",
+    "FROM moon_light ",
+    "GROUP BY ", metric, ";"
+  )
 
   # make the table
+  summarized <- sqldf::sqldf(query)
   knitr::kable(summarized, "simple")
 }
 
