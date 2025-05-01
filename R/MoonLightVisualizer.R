@@ -14,18 +14,14 @@
 #' moon_light_visual("2025-03-10")
 moon_light_visual <- function(start_date, end_date, ...) {
 
-  #creating new column to extract date from date and time
-  date_data <- moon_light |> dplyr::mutate(date = substring(YYYY.MM.DDTHH.mm.ss.fff, 1, 10))
+  data <- moon_light |> filter(Date >= start_date & Date <= end_date)
 
-  date_data <- date_data |> filter(date >= start_date & date <= end_date)
-
-  average_light <- date_data |>
-    dplyr::group_by(date) |>
-    dplyr::summarize(mean_light = mean(Hz), .groups = "drop",
-                     moon_phase = mean(Category))
+  average_light <- data |>
+    dplyr::group_by(Date) |>
+    dplyr::summarize(mean_light = mean(Frequency), .groups = "drop")
 
   plot <- average_light |>
-    ggplot(aes(x = date, y = mean_light)) +
+    ggplot(aes(x = Date, y = mean_light)) +
     geom_bar(stat = "identity") +
     labs(x = "Date", y = "Average Hz detected each day")
 
