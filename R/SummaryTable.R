@@ -5,6 +5,7 @@
 #' @author Molly Daniel
 #' @import dplyr
 #' @import knitr
+#' @import sqldf
 #' @export
 #' @param start
 #' @param end
@@ -14,18 +15,17 @@
 #' avg_light("2025-03-01", "2025-03-10")
 avg_light <- function(
     # if no argument is passed in, use all dates as the default
-    start = min(as.Date(substring(moon_light$UTC.Date...Time, 1, 10))),
-    end = max(as.Date(substring(moon_light$UTC.Date...Time, 1, 10))), ...) {
+    start = min(moon_light$Date),
+    end = max(moon_light$Date)) {
 
-  #creating new column to extract date from date and time
-  date_data <- moon_light |> dplyr::mutate(date = as.Date(substring(UTC.Date...Time, 1, 10)))
+  query <- paste0(
+    "SELECT Date, avg(Frequency) AS meanFreq, avg(MSAS) AS meanMSAS ",
+    "FROM moon_light ",
+    "WHERE Date >= '", start, "' AND Date <= '", end, "' ",
+    "GROUP BY Date"
+  )
 
-  # filter the dates and make summary table
-  summarized <- date_data |> filter(date >= as.Date(start) & date <= as.Date(end)) |>
-    dplyr::group_by(date) |>
-    dplyr::summarize(meanFreq = mean(Frequency),
-                     meanMSAS = mean(MSAS))
-
+  summarized <- sqldf::sqldf(query)
   knitr::kable(summarized, "simple")
 }
 

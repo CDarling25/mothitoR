@@ -4,11 +4,7 @@
 \alias{avg_light}
 \title{Summary Table of average light sensor data}
 \usage{
-avg_light(
-  start = min(as.Date(substring(moon_light$UTC.Date...Time, 1, 10))),
-  end = max(as.Date(substring(moon_light$UTC.Date...Time, 1, 10))),
-  ...
-)
+avg_light(start = min(moon_light$Date), end = max(moon_light$Date))
 }
 \arguments{
 \item{...}{Additional arguments}
